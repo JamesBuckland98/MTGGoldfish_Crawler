@@ -7,7 +7,7 @@ This was an experiment started from the need to search card prices online quickl
  - input file must be a .txt file
  - Output file must be a .csv file
 #### Prerequisite 
-- Must have Java on current machine
+- Must have at least Java 1.8 on current machine
 - Must have up to date chrome driver (Given to you in the folder)
 
 #### Config
