@@ -47,10 +47,10 @@ public class AutoBrowsing {
 				List<WebElement> tableRow = table.findElements(By.tagName("tr"));
 				for(WebElement tableData: tableRow) {
 					List<WebElement> td = tableData.findElements(By.tagName("td"));
-					if((blacklist.contains(td.get(1).getText())) == false && td.get(0).findElement(By.tagName("a")).getText().equals(card)) {
+					if((blacklist.contains(td.get(1).getText())) == false && td.get(0).findElement(By.tagName("a")).getText().equals(card.trim())) {
 						String keyString = Keys.CONTROL+Keys.SHIFT.toString()+Keys.ENTER.toString();
 						td.get(0).findElement(By.tagName("a")).sendKeys(keyString);
-					};
+					}
 				}
 				String originalHandle = driver.getWindowHandle();
 				for(String handle : driver.getWindowHandles()) {
