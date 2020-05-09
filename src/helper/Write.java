@@ -1,4 +1,4 @@
-package automatedWebBrowsing;
+package helper;
 
 import java.io.FileWriter;
 import java.io.IOException;
