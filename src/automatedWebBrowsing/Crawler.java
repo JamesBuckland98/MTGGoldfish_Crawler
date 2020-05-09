@@ -54,7 +54,11 @@ public class Crawler {
 				if(paperPriceBox.size() != 0) {
 					String price = paperPriceBox.get(0).findElement(By.className("price-box-price")).getText();
 					String set = driver.findElement(By.className("price-card-name-set-name")).getText();
-					Card foundCard = new Card(TextCleaner.escapeSpecialCharacters(cardName), set, price);
+					String cleanName = TextCleaner.escapeSpecialCharacters(cardName);
+					Card foundCard = new Card(cleanName, set, price);
+					if(checkIfFoil(driver)) {
+						foundCard.setName(cleanName + " (foil)");
+					}
 					allCards.add(foundCard);
 				}				
 			} catch(NoSuchElementException e) {
@@ -68,5 +72,16 @@ public class Crawler {
 			}
 	     }
 	     driver.switchTo().window(originalHandle);
+	}
+	
+	private static boolean checkIfFoil(WebDriver driver) {
+		WebElement foilContainer = driver.findElement(By.className("price-card-name-header-name"));
+		List<WebElement> foil = foilContainer.findElements(By.tagName("img"));
+		if(foil.size() != 0) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 }
