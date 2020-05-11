@@ -6,6 +6,9 @@ public class Card {
 	private String set;
 	private String price;
 	
+	public Card() {
+	}
+	
 	public Card(String name, String set, String price) {
 		super();
 		this.name = name;

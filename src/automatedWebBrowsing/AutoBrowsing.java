@@ -2,7 +2,6 @@ package automatedWebBrowsing;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 
@@ -20,18 +19,17 @@ public class AutoBrowsing {
 		
 		WebDriver driver = Config.setUp();
 		
-		for(String cardName: cardList) {
-			if(Connection.checkInternetConnection()) {
-				try {
-					Write.writeToCsv(Crawler.searchForCard(cardName, blacklist, driver), args[1]);
-				} catch(Exception e) {
-					System.out.println("error " + e);
-				} finally {
-					System.out.println(cardName + " search complete!");
-					TimeUnit.SECONDS.sleep(3);
+		if(Connection.checkInternetConnection()) {
+			for(String cardName: cardList) {
+					try {
+						Write.writeToCsv(Crawler.searchForCard(cardName, blacklist, driver), args[1]);
+					} catch(Exception e) {
+						System.out.println("error " + e);
+					} finally {
+						System.out.println(cardName + " search complete!");
+					}
 				}
-			}
-		};
+		}
 			
 		System.out.println("All cards searched!");
 	

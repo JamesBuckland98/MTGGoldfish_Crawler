@@ -15,10 +15,10 @@ public class Config {
 		options.addArguments("headless");
 
 		//Initiating  chromedriver
-		WebDriver driver= new ChromeDriver(options);
+		WebDriver driver= new ChromeDriver();
 		
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		
 		return driver;		
 	}

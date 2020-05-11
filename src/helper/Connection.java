@@ -2,10 +2,11 @@ package helper;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.concurrent.TimeUnit;
 
 public class Connection {
 	
-	public static boolean checkInternetConnection() {
+	public static boolean checkInternetConnection() throws InterruptedException {
 		int attemps = 0;
 		boolean result = false; 
 		System.out.println("Attempting to connect to https://www.mtggoldfish.com/");
