@@ -19,6 +19,8 @@ public class Connection {
 			} catch(Exception e) {
 				System.out.println("No internet connection trying again...");
 				attemps++;
+			} finally {
+				TimeUnit.SECONDS.sleep(5);
 			}
 		}
 		return result;

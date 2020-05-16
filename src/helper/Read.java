@@ -14,7 +14,9 @@ public class Read {
 		BufferedReader reader = new BufferedReader(new FileReader(file)); 
 		String cardName; 
 		while ((cardName = reader.readLine()) != null) {
-			cardList.add(cardName);
+			if(cardName.trim().length() > 0) {
+				cardList.add(cardName.trim());
+			}
 		}
 		reader.close();
 		return(cardList);
