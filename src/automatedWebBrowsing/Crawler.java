@@ -2,6 +2,8 @@ package automatedWebBrowsing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,15 +16,18 @@ import model.Card;
 
 public class Crawler {
 	
-	private static ArrayList<Card> allCards = new ArrayList<Card>();
+	private static final Logger LOGGER = Logger.getLogger(Crawler.class.getName());
+	
+	private static ArrayList<Card> allCards = new ArrayList<>();
 	private static String cardName;
 	private static WebDriver driver;
-	private static Card card = new Card();;
+	private static Card card = new Card();
 
-	public static ArrayList<Card> searchForCard(String cardName, ArrayList<String> blacklist, WebDriver driver) {
+	public static List<Card> searchForCard(String cardName, List<String> blacklist, WebDriver driver) {
 		Crawler.driver = driver;
 		Crawler.cardName = cardName;
-		System.out.println("Seaching for card: " + cardName + "...");
+		String message = String.format("Seaching for card: %s ...", cardName);
+		LOGGER.log(Level.INFO, message);
 		driver.get("https://www.mtggoldfish.com/");
 		WebElement searchBar = driver.findElement(By.id("query_string"));
 		searchBar.sendKeys(cardName);
@@ -31,14 +36,14 @@ public class Crawler {
 		return allCards;
 	}
 	
-	private static void findTable(ArrayList<String> blacklist) {
+	private static void findTable(List<String> blacklist) {
 		try {
 			WebElement table = driver.findElement(By.className("table-striped"));
 			List<WebElement> tableRow = table.findElements(By.tagName("tr"));
 			for(WebElement tableData: tableRow) {
 				card.setName(cardName);
 				List<WebElement> td = tableData.findElements(By.tagName("td"));
-				if((blacklist.contains(td.get(1).getText())) == false && td.get(0).findElement(By.tagName("a")).getText().equalsIgnoreCase(cardName)) {
+				if(!(blacklist.contains(td.get(1).getText())) && td.get(0).findElement(By.tagName("a")).getText().equalsIgnoreCase(cardName)) {
 					if(checkIfFoil(td.get(0))) {
 						card.setName(card.getName() + " (foil)");
 					} else {
@@ -67,7 +72,7 @@ public class Crawler {
 				Card foundCard = new Card(cleanName, set, price);
 				allCards.add(foundCard);		
 			} catch(NoSuchElementException e) {
-				//fail gracefully 
+				// fail gracefully
 			} finally {
 				if (!handle.equals(originalHandle)) {
 					driver.switchTo().window(handle).close();
