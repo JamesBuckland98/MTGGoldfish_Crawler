@@ -6,6 +6,8 @@ This was an experiment started from the need to search card prices online quickl
 `java -jar GoldfishCrawler.jar <input file> <output file>`
  - input file must be a .txt file
  - Output file must be a .csv file
+##### To Run in background mode 
+`java -jar GoldfishCrawler.jar <input file> <output file> -b`
 #### Prerequisite 
 - Must have at least Java 1.8 on current machine
 - Must have up to date chrome driver (Given to you in the folder)
