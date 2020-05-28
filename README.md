@@ -10,7 +10,6 @@ This was an experiment started from the need to search card prices online quickl
 `java -jar GoldfishCrawler.jar <input file> <output file> -b`
 #### Prerequisite 
 - Must have at least Java 1.8 on current machine
-- Must have up to date chrome driver (Given to you in the folder)
 
 #### Config
 - `blacklist.txt` is a file for black listing any sets from Magic: the Gathering. By default most online sets have been blacklisted to speed up the search algorith 
